@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  font-family: "Museo Sans Cyrl", sans-serif;
+  color: #333333;
+  box-sizing: border-box;
+}
+
+a {
+  color: #6933DC;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.big-title {
+  font-family: "Museo Sans Cyrl Bold", sans-serif;
+  font-size: 54px;
+  line-height: 65px;
+
+  span {
+    color: #6933DC;
+  }
+}
+
+.common-title {
+  font-family: "Museo Sans Cyrl Bold", sans-serif;
+  font-size: 48px;
+  line-height: 58px;
+  color: #333333;
+
+  span {
+    color: #6933DC;
+  }
+}
+
+.button {
+  padding: 14px 35px;
+  background: #6933DC;
+  border-radius: 6px;
+  font-size: 17px;
+  line-height: 20px;
+  color: #FFFFFF;
+  border: 0;
+  cursor: pointer;
+  transition: .4s;
+  text-decoration: none;
+
+  &a {
+    display: inline-block;
+  }
+
+  &:hover {
+    background: #2a0c69;
+  }
+
+  &:disabled {
+    background-color: #e2dfe7;
+    cursor: not-allowed;
+  }
+
+  &.button-transparent {
+    background: transparent;
+    color: #6933DC;
+    border: 1px solid #6933DC;
+
+    &:disabled {
+      background: transparent;
+      color: #e2dfe7;
+      border: 1px solid #e2dfe7;
+    }
+
+    &:hover {
+      background: #6933DC;
+      color: #FFFFFF;
+    }
+  }
+}
+
+
+
