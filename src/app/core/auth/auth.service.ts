@@ -91,6 +91,13 @@ export class AuthService {
     return null;
   }
 
+  public getTokens(): {accessToken: string | null, refreshToken: string | null} {
+
+    return {
+      accessToken: localStorage.getItem(this.accessTokenKey),
+      refreshToken: localStorage.getItem(this.refreshTokenKey)
+    }
+  }
   public setUserEmail(email: string | undefined): void { // дописывал сам
     if (email) {
       localStorage.setItem(this.userEmail, email);
