@@ -6,6 +6,7 @@ import {Observable, Subject, tap} from "rxjs";
 import {UserInfoType} from "../../../types/user-info.type";
 import {LogoutResponseType} from "../../../types/logout-response.type";
 import {SignupResponseType} from "../../../types/signup-response.type";
+import {RefreshResponseType} from "../../../types/refresh-response.type";
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,11 @@ export class AuthService {
     return this.http.post<LogoutResponseType>(environment.apiHost + 'logout', {refreshToken});
   }
 
+  refresh(): Observable<RefreshResponseType> {
+    const refreshToken: string | null = localStorage.getItem(this.refreshTokenKey);
+    return this.http.post<RefreshResponseType>(environment.apiHost + 'refresh', {refreshToken})
+  }
+
   public getLoggedIn(): boolean {
     return this.isLogged; //функция для проверки извне (header) состояния авторизации
   }
@@ -74,6 +80,7 @@ export class AuthService {
     this.isLogged = false;
     this.isLogged$.next(false); //меняем состояние obs для слушателей в других компонентах
   }
+
 
   public setUserInfo(info: UserInfoType): void {
     localStorage.setItem(this.userInfoKey, JSON.stringify(info)); //хранить объект в localStorage нельзя, поэтому преобразуем пользователя в строку
