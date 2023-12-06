@@ -4,6 +4,8 @@ import {QuizListType} from "../../../../types/quiz-list.type";
 import {AuthService} from "../../../core/auth/auth.service";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {TestResultType} from "../../../../types/test-result.type";
+import {Router} from "@angular/router";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-choice',
@@ -14,7 +16,8 @@ export class ChoiceComponent implements OnInit{
 
   quizzes: QuizListType[] = [];
   constructor(private testService: TestService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
   }
   ngOnInit() {
     this.testService.getTests()
@@ -45,4 +48,7 @@ export class ChoiceComponent implements OnInit{
       })
   }
 
+  chooseQuiz(id: number): void {
+      this.router.navigate(['test/', id]);
+  }
 }

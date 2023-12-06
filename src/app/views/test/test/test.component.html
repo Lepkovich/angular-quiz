@@ -1,1 +1,47 @@
-<p>test works!</p>
+<section class="test" *ngIf="quiz">
+  <div class="container">
+    <div class="test-pre-title" id="pre-title">{{quiz.name}}</div>
+    <div class="test-progress-bar" id="progress-bar">
+    </div>
+    <div class="test-question">
+      <div class="test-question-title" id="question-title">
+        <span>Вопрос {{currentQuestionIndex}}:</span> {{quiz.questions[currentQuestionIndex - 1].question}}
+      </div>
+
+      <div class="test-question-options" id="options">
+        <!--         закоментировали верстку из html, потому что создаем ее в файле test.ts-->
+        <div class="test-question-option">
+          <input type="radio" id="answer-one" name="answer">
+          <label for="answer-one">Вариант ответа 1 </label>
+        </div>
+        <div class="test-question-option">
+          <input type="radio" id="answer-two" name="answer">
+          <label for="answer-two">Вариант ответа 2 </label>
+        </div>
+        <div class="test-question-option">
+          <input type="radio" id="answer-three" name="answer">
+          <label for="answer-three">Вариант ответа 3 </label>
+        </div>
+        <div class="test-question-option">
+          <input type="radio" id="answer-four" name="answer">
+          <label for="answer-four">Вариант ответа 4 </label>
+        </div>
+      </div>
+    </div>
+    <div class="test-actions">
+      <div class="test-previous-action">
+        <button class="button button-transparent" id="prev" disabled>Назад</button>
+      </div>
+      <div class="test-time">
+        <div class="test-time-text">Осталось времени:</div>
+        <div class="test-time-clock" id="timer">{{timerSeconds}}</div>
+      </div>
+      <div class="test-next-action">
+        <button class="button button-transparent" id="next" disabled>Дальше</button>
+      </div>
+    </div>
+    <div class="pass-question">
+      <a href="javascript:void(0)" id="pass">Пропустить вопрос <img src="/assets/images/small-arrow.png" alt="стрелочка"></a>
+    </div>
+  </div>
+</section>
