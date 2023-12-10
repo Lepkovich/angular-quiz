@@ -1,47 +1,51 @@
 <section class="test" *ngIf="quiz">
   <div class="container">
     <div class="test-pre-title" id="pre-title">{{quiz.name}}</div>
-    <div class="test-progress-bar" id="progress-bar">
+    <div class="test-progress-bar" id="progress-bar" >
+      <div class="test-progress-bar-item" *ngFor="let item of this.quiz.questions; let i = index;"
+      [class.active]="currentQuestionIndex === (i + 1)"
+      [class.complete]="currentQuestionIndex > (i + 1)">
+      <!--  присвоить класс active если отрисовываем кружок текущего вопроса
+            присвоить класс complete если уже следующий вопрос-->
+
+      <div class="test-progress-bar-item-circle"></div>
+        <div class="test-progress-bar-item-text">Вопрос {{i + 1}}</div>
+      </div>
     </div>
     <div class="test-question">
       <div class="test-question-title" id="question-title">
-        <span>Вопрос {{currentQuestionIndex}}:</span> {{quiz.questions[currentQuestionIndex - 1].question}}
+        <span>Вопрос {{currentQuestionIndex}}:</span> {{activeQuestion.question}}
       </div>
 
       <div class="test-question-options" id="options">
-        <!--         закоментировали верстку из html, потому что создаем ее в файле test.ts-->
-        <div class="test-question-option">
-          <input type="radio" id="answer-one" name="answer">
-          <label for="answer-one">Вариант ответа 1 </label>
-        </div>
-        <div class="test-question-option">
-          <input type="radio" id="answer-two" name="answer">
-          <label for="answer-two">Вариант ответа 2 </label>
-        </div>
-        <div class="test-question-option">
-          <input type="radio" id="answer-three" name="answer">
-          <label for="answer-three">Вариант ответа 3 </label>
-        </div>
-        <div class="test-question-option">
-          <input type="radio" id="answer-four" name="answer">
-          <label for="answer-four">Вариант ответа 4 </label>
+        <div class="test-question-option" *ngFor="let answer of activeQuestion.answers">
+          <input type="radio" id="answer-{{answer.id}}" name="answer" [(ngModel)]="chosenAnswerId"
+                 [value]="answer.id">
+          <label for="answer-{{answer.id}}">{{answer.answer}}</label>
         </div>
       </div>
     </div>
     <div class="test-actions">
       <div class="test-previous-action">
-        <button class="button button-transparent" id="prev" disabled>Назад</button>
+        <button class="button button-transparent" id="prev"
+                [disabled]="currentQuestionIndex === 1" (click)="move(actionTestType.prev)">Назад
+        </button>
       </div>
       <div class="test-time">
         <div class="test-time-text">Осталось времени:</div>
         <div class="test-time-clock" id="timer">{{timerSeconds}}</div>
       </div>
       <div class="test-next-action">
-        <button class="button button-transparent" id="next" disabled>Дальше</button>
+        <button class="button button-transparent" id="next" [disabled]="!chosenAnswerId"
+                (click)="move(actionTestType.next)">
+          {{currentQuestionIndex === quiz.questions.length ? 'Завершить' : 'Дальше'}}
+        </button>
       </div>
     </div>
     <div class="pass-question">
-      <a href="javascript:void(0)" id="pass">Пропустить вопрос <img src="/assets/images/small-arrow.png" alt="стрелочка"></a>
+      <a href="javascript:void(0)" id="pass" (click)="move(actionTestType.pass)">Пропустить вопрос <img
+        src="/assets/images/small-arrow.png"
+        alt="стрелочка"></a>
     </div>
   </div>
 </section>
