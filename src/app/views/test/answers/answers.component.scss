@@ -1,0 +1,91 @@
+.answers {
+  padding-top: 20px;
+  padding-bottom: 76px;
+}
+.pre-title {
+  display: flex;
+  align-items: center;
+}
+.pre-title-text {
+  font-size: 20px;
+  line-height: 24px;
+  color: #DCDCF3;
+}
+.pre-title-text img {
+  padding: 0 15px;
+}
+.pre-title-test-num {
+  font-size: 20px;
+  line-height: 24px;
+  color: #6933DC;
+}
+.test-answers-title {
+  margin-top: 60px;
+}
+.user {
+  color: #333;
+  font-size: 20px;
+  margin-top: 10px;
+}
+.user span {
+  color: #6933DC;
+  font-size: 20px;
+  font-family: "Museo Sans Cyrl Bold", sans-serif;
+}
+.test-answers-block-title {
+  font-family: "Museo Sans Cyrl Bold", sans-serif;
+  font-size: 36px;
+  line-height: 43px;
+  margin: 60px 0 40px 0;
+
+}
+.test-answers-block-title span {
+  color: #6933DC;
+}
+.test-answers-block-options {
+  font-size: 20px;
+  line-height: 24px;
+  color: #333333;
+}
+.test-answers-block-option {
+  margin-bottom: 20px;
+  display: flex;
+}
+.test-answers-block-option-circle {
+  box-sizing: border-box;
+  min-width: 20px;
+  height: 20px;
+  border: 3px solid #6933DC;
+  border-radius: 50%;
+  margin: 0 13px 0 0;
+  transform: translateY(2px);
+}
+.correct-answer-circle {
+  border: 6px solid #5FDC33;
+}
+.correct-answer-text {
+  color: #5FDC33;
+}
+.wrong-answer-circle {
+  border: 6px solid #DC3333;
+}
+.wrong-answer-text {
+  color: #DC3333;
+}
+.back-to-results {
+  margin-top: 60px;
+  display: flex;
+  justify-content: flex-end;
+
+}
+.back-to-results a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.back-to-results a:hover {
+  text-decoration: underline;
+}
+.back-to-results img {
+  padding-left: 13px;
+}

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TestService} from "../../../shared/services/test.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../core/auth/auth.service";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {PassTestResponseType} from "../../../../types/pass-test-response.type";
@@ -13,10 +13,12 @@ import {PassTestResponseType} from "../../../../types/pass-test-response.type";
 export class ResultComponent implements OnInit{
 
   result: string = '';
+  testId: string | number = '';
 
   constructor(private testService: TestService,
               private activatedRoute: ActivatedRoute,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,6 +27,7 @@ export class ResultComponent implements OnInit{
       this.activatedRoute.queryParams
         .subscribe(param => {
           if(param['id']) {
+            this.testId = param['id'];
             this.testService.getResult(param['id'], userInfo.userId)
               .subscribe(result => {
                 if(result) {
@@ -37,5 +40,9 @@ export class ResultComponent implements OnInit{
           }
         })
     }
+  }
+
+  showAnswers() {
+    this.router.navigate(['/answer', this.testId])
   }
 }
