@@ -1,20 +1,40 @@
 <section class="answers">
   <div class="container">
     <div class="pre-title">
-      <div class="pre-title-text">Результат прохождения теста <img src="../../../../assets/images/small-arrow-1.png" alt="стрелочка"></div>
-      <div class="pre-title-test-num" id="pre-title">Тест №1. “JavaScript: Заглушка”</div>
+      <div class="pre-title-text">Результат прохождения теста <img src="../../../../assets/images/small-arrow-1.png"
+                                                                   alt="стрелочка"></div>
+      <div class="pre-title-test-num" id="pre-title">{{testName}}</div>
     </div>
     <div class="test-answers">
       <div class="test-answers-title big-title">
         <span>Правильные ответы</span> к тесту
       </div>
       <div class="user" id="user">
-        Тест выполнил <span>Роман Чернов, roman@itlogia.ru</span>
+        Тест выполнил <span>{{userInfo}}, {{userEmail}}</span>
       </div>
-      <div class="test-answers-block" id="answers-block"></div>
+      <div class="test-answers-block" id="answers-block" *ngFor="let question of questions; let i = index">
+        <div class="test-answers-block-title" id="question">
+          <span>Вопрос {{i+1}}:</span> {{question.question}}
+<!--          quizResult.test.questions[i]-->
+        </div>
+        <div class="test-answers-block-options" id="options" *ngFor="let answer of quizResult.test.questions[i].answers">
+          <div class="test-answers-block-option">
+            <div class="test-answers-block-option-circle"
+                 [ngClass]="{'correct-answer-circle': answer.correct === true,
+                  'wrong-answer-circle': answer.correct === false}">
+            </div>
+<!--            [class.correct-answer-circle]="answer.correct"-->
+<!--            [class.wrong-answer-circle]="answer.correct"-->
+            <div class="test-answers-block-option-text"
+                 [ngClass]="{'correct-answer-text': answer.correct === true,
+                  'wrong-answer-text': answer.correct === false}">{{answer.answer}}</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="back-to-results">
-      <a href="javascript:void(0)" id="back-to-results">Обратно к моему результату теста <img src="../../../../assets/images/small-arrow.png" alt="стрелочка"></a>
+      <a href="javascript:void(0)" id="back-to-results" (click)="backToResults()">Обратно к моему результату теста <img
+        src="../../../../assets/images/small-arrow.png" alt="стрелочка"></a>
     </div>
   </div>
 </section>
