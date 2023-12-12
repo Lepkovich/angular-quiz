@@ -6,6 +6,7 @@ import {QuizType} from "../../../../types/quiz.type";
 import {ActionTestType} from "../../../../types/action-test.type";
 import {UserResultType} from "../../../../types/user-result.type";
 import {AuthService} from "../../../core/auth/auth.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-test',
@@ -25,7 +26,8 @@ export class TestComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private testService: TestService,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private _snackBar: MatSnackBar) {
 
   }
 
@@ -37,7 +39,8 @@ export class TestComponent implements OnInit {
             .subscribe(result => {
               if (result) {
                 if ((result as DefaultResponseType).error !== undefined) {
-                  throw new Error((result as DefaultResponseType).message); //реализовать snackbar с ошибкой
+                  this._snackBar.open('Ошибка получения вопросов теста')
+                  throw new Error((result as DefaultResponseType).message);
                 }
                 this.quiz = result as QuizType;
                 this.startQuiz();
@@ -109,18 +112,11 @@ export class TestComponent implements OnInit {
     }
 
 
-
     const currentResult: UserResultType | undefined = this.userResult.find(item => {
       return item.questionId === this.activeQuestion.id;
     })
     if (currentResult) {
       this.chosenAnswerId = currentResult.chosenAnswerId;
     }
-
-
-
-
   }
-
-
 }

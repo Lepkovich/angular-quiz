@@ -12,22 +12,23 @@
       <div class="user" id="user">
         Тест выполнил <span>{{userInfo}}, {{userEmail}}</span>
       </div>
-      <div class="test-answers-block" id="answers-block" *ngFor="let question of questions; let i = index">
-        <div class="test-answers-block-title" id="question">
-          <span>Вопрос {{i+1}}:</span> {{question.question}}
-<!--          quizResult.test.questions[i]-->
-        </div>
-        <div class="test-answers-block-options" id="options" *ngFor="let answer of quizResult.test.questions[i].answers">
-          <div class="test-answers-block-option">
-            <div class="test-answers-block-option-circle"
-                 [ngClass]="{'correct-answer-circle': answer.correct === true,
+      <div *ngIf="isLoading">Загрузка...</div>
+      <div *ngIf="!isLoading">
+        <div class="test-answers-block" id="answers-block" *ngFor="let question of questions; let i = index">
+          <div class="test-answers-block-title" id="question">
+            <span>Вопрос {{i + 1}}:</span> {{question.question}}
+          </div>
+          <div class="test-answers-block-options" id="options"
+               *ngFor="let answer of quizResult.test.questions[i].answers">
+            <div class="test-answers-block-option">
+              <div class="test-answers-block-option-circle"
+                   [ngClass]="{'correct-answer-circle': answer.correct === true,
                   'wrong-answer-circle': answer.correct === false}">
-            </div>
-<!--            [class.correct-answer-circle]="answer.correct"-->
-<!--            [class.wrong-answer-circle]="answer.correct"-->
-            <div class="test-answers-block-option-text"
-                 [ngClass]="{'correct-answer-text': answer.correct === true,
+              </div>
+              <div class="test-answers-block-option-text"
+                   [ngClass]="{'correct-answer-text': answer.correct === true,
                   'wrong-answer-text': answer.correct === false}">{{answer.answer}}</div>
+            </div>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import {AuthService} from "../../../core/auth/auth.service";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {TestResultType} from "../../../../types/test-result.type";
 import {Router} from "@angular/router";
-import {environment} from "../../../../environments/environment";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-choice',
@@ -17,7 +17,8 @@ export class ChoiceComponent implements OnInit{
   quizzes: QuizListType[] = [];
   constructor(private testService: TestService,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private _snackBar: MatSnackBar) {
   }
   ngOnInit() {
     this.testService.getTests()
@@ -30,6 +31,7 @@ export class ChoiceComponent implements OnInit{
             .subscribe((result: DefaultResponseType | TestResultType[]) => {
               if (result) {
                 if ((result as DefaultResponseType).error !== undefined) {
+                  this._snackBar.open('Ошибка получения результатов прохождения теста')
                   throw new Error((result as DefaultResponseType).message);
                 }
                 const testResult = result as TestResultType[];

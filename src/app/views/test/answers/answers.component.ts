@@ -17,6 +17,7 @@ export class AnswersComponent implements OnInit{
   userInfo: string | undefined = '';
   userId: number | undefined = 0;
   testName: string = '';
+  isLoading: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private testService: TestService,
@@ -31,6 +32,7 @@ export class AnswersComponent implements OnInit{
     this.userEmail = this.authService.getUserEmail();
 
     if (this.userId)  {
+      this.isLoading = true;
       this.activatedRoute.params
         .subscribe(param => {
           if (param['id']) {
@@ -40,10 +42,12 @@ export class AnswersComponent implements OnInit{
                   if ((result as DefaultResponseType).error) {
                     throw new Error((result as DefaultResponseType).message as string);
                   }
+
                   this.quizResult = result as QuizResultType;
                   this.testName = this.quizResult.test.name;
 
                   console.log(this.quizResult);
+                  this.isLoading = false;
                 }
 
               })
